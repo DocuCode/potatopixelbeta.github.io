@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a9398255e1.js" crossorigin="anonymous"></script>
+    <i class="fa-solid fa-bell" style="color: #427348;"></i>
+    <title>parametres | potao's pixel</title>
+    <link rel="stylesheet" type="text/css" href="parametres.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    
+        #settings {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        #user-info {
+            margin-bottom: 20px;
+        }
+    
+        #logout-button {
+            background-color: #ff3333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Prompt:wght@300&family=Titillium+Web&family=Ubuntu:wght@300;500&display=swap');
+
+* {
+    font-family: 'Concert One', cursive;
+    font-family: 'Prompt', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
+body {
+    background-color: #ffa550;
+}
+header {
+    background-color: #952f00;
+    height: 100px;
+    width: 100%;
+    position: fixed; top: 0; left: 0;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+    font-size: large;
+}
+.logo {
+    cursor: pointer;
+    position: absolute; top: 1px;
+}
+
+.titre {
+  position: absolute; right: 25%;left: 25%; top: -10px;
+  width: 70%;
+  font-size: 40px;
+  z-index: 9999;
+}
+
+footer {
+    text-size-adjust: 1px;
+    background-color: #FF6A00;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    font-size: 25px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease; /* Define the transition property */
+}
+
+.discord {
+  text-decoration: none;
+  color: black;
+  position: absolute;  right: 30px; top: 25px;
+  cursor: pointer;
+}
+.discord:hover {
+  color: rgb(0, 89, 255);
+}
+
+
+
+
+
+/* le menu */
+.menu {
+    position: absolute; right: 20px;
+    display: inline-block;
+    z-index: 500;
+    margin-top: 30px;
+  }
+  
+  .menu-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .menu-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FFBE78;
+    padding: 10px;
+    width: 190px;
+    border-radius: 10px;
+    list-style-type: none;
+    color: rgb(50, 49, 49);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .menu-list li {
+    margin-bottom: 5px;
+  }
+
+  .BM:hover {
+      color: blue;
+  }
+  
+  .menu-toggle:focus + .menu-list,
+  .menu-list:focus-within {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+
+
+
+
+
+
+
+
+
+  @media screen and (max-width: 800px){
+    .titre {
+      font-size: 30px;
+      position: absolute; left: 20%; right: 20%;
+    }
+  }
+
+  @media screen and (max-width: 550px){
+    .titre {
+      font-size: 30px;
+      position: absolute; left: 110px;
+    }
+
+    .By {
+      position: absolute; left: 1px;
+    }
+  }
+
+    </style>
+    
+</head>
+<header>
+    <p class="titre" style="margin-left: 1%;"> Bienvenue sur Potato's Pixel</p>
+    <img onclick="window.location.href = '/'" class="logo" style="height: 110px; width: 110px;" src="https://cdn.discordapp.com/attachments/1109389516424355911/1146399611527892992/16932318034995717006055266253194.png">
+     <div class="menu">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <ul style="display: block;" class="menu-list">
+            <li class="BM" onclick="window.location.href = 'menu'"><i class="fa-solid fa-house"></i> Accueil </li> 
+            <li class="BM" onclick="window.location.href = 'jeu'"><i class="fa-solid fa-gamepad"></i> Le jeu </li> 
+            <li class="BM" onclick="window.location.href = 'parametres'"><i class="fa-solid fa-gear"></i> Paramètres </li>
+            <li class="BM" onclick="window.location.href = 'sinscrire'"><i class="fa-solid fa-user"></i> Se Connecter </li>
+        </ul>
+    </div>    
+</header>
+<div id="settings">
+    <div id="user-info">
+        <h2>Informations sur l'utilisateur</h2>
+        <p id="user-email"></p>
+        <p id="user-name"></p>
+    </div>
+
+    <div id="change-email">
+        <h2>Changer l'adresse e-mail</h2>
+        <input type="email" id="new-email" placeholder="Nouvelle adresse e-mail">
+        <button id="change-email-button">Changer l'adresse e-mail</button>
+    </div>
+
+    <div id="change-password">
+        <h2>Changer le mot de passe</h2>
+        <input type="password" id="new-password" placeholder="Nouveau mot de passe">
+        <button id="change-password-button">Changer le mot de passe</button>
+    </div>
+
+    <button id="logout-button">Se déconnecter</button>
+</div>
+
+    <script>
+        // ... Votre code JavaScript existant ...
+
+        // Ajoutez ces écouteurs d'événements pour le changement d'adresse e-mail et de mot de passe
+        document.getElementById('change-email-button').addEventListener('click', function () {
+            const newEmail = document.getElementById('new-email').value;
+            changeEmail(newEmail);
+        });
+
+        document.getElementById('change-password-button').addEventListener('click', function () {
+            const newPassword = document.getElementById('new-password').value;
+            changePassword(newPassword);
+        });
+
+        // Ajoutez ces fonctions pour effectuer le changement d'adresse e-mail et de mot de passe
+        async function changeEmail(newEmail) {
+            try {
+                const response = await fetch('/api/changeEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ newEmail })
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                // Actualisez les informations de l'utilisateur après le changement
+                init();
+            } catch (error) {
+                console.error('Erreur lors du changement d\'adresse e-mail :', error);
+            }
+        }
+
+        async function changePassword(newPassword) {
+            try {
+                const response = await fetch('/api/changePassword', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ newPassword })
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                // Actualisez les informations de l'utilisateur après le changement
+                init();
+            } catch (error) {
+                console.error('Erreur lors du changement de mot de passe :', error);
+            }
+        }
+    </script>
+
+
+</body>
+
+
+
+
+
+</html>

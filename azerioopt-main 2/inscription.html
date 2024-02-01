@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" CONTENT="Author: DocuCode">
+    <meta name="robots" content="noindex,nofollow">
+    <title>S'inscire | potato's pixel</title>
+    <link rel="stylesheet" type="text/css" href="public/test.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="test.js"></script>
+</head>
+
+<body>
+
+
+
+<div class="container">
+    <div id="connexion">
+        <h1 class="title">Hello World</h1>
+        <p class="paragraphe">
+            Veuillez entrer vos détails personnel et démarrez votre journée sur PotatoPixel
+        </p>
+        <a href="connection" class="btn-link connexion">Se connecter</a>
+    </div>
+    <div id="inscription">
+        <h1 class="title">Créer un compte</h1>
+        <p class="paragraphe">
+            Veuillez remplir tous les champs
+        </p>
+        <form id="account" class="formulaire">
+            <div class="group-form">
+                <input id="pseudo" type="text" placeholder="Nom">
+                <div class="icon-user"></div>
+            </div>
+            <div class="group-form">
+                <input id="email" type="email" placeholder="mail">
+                <div class="icon-mail"></div>
+            </div>
+            <div class="group-form">
+                <input id="password" type="password" placeholder="password">
+                <div class="icon-password"></div>
+            </div>
+            <div class="group-form">
+                <button type="submit" class="inscription">S'inscrire</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    const signUp = async (userData) => {
+        try {
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Erreur lors de la demande d\'inscription :', error);
+        }
+    };
+
+    document.getElementById("account").addEventListener('submit', () => {
+        const userData = {
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            name: document.getElementById("pseudo").value
+        };
+        signUp(userData);
+    });
+</script>
+
+
+</body>
+</html>

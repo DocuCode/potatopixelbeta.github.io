@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="public/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a9398255e1.js" crossorigin="anonymous"></script>
+    <title>Potato's Pixel</title>
+    <i class="fa-solid fa-bell" style="color: #427348;"></i>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <script src="index.js"></script>
+</head>
+<header>
+    <p class="titre" style="margin-left: 1%;"> Bienvenue sur Potato's Pixel</p>
+    <img onclick="window.location.href = '/'" class="logo" style="height: 110px; width: 110px;" src="https://cdn.discordapp.com/attachments/1109389516424355911/1146399611527892992/16932318034995717006055266253194.png">
+     <div class="menu">
+        <p id="name"></p>
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <ul style="display: block;" class="menu-list">
+            <li class="BM" onclick="window.location.href = 'index.html'"><i class="fa-solid fa-house"></i> Accueil </li> 
+            <li class="BM" onclick="window.location.href = 'game.html'"><i class="fa-solid fa-gamepad"></i> Le jeu </li> 
+            <li class="BM" onclick="window.location.href = 'parametres.html'"><i class="fa-solid fa-gear"></i> Paramètres </li>
+            <li class="BM" onclick="window.location.href = 'inscription.html'"><i class="fa-solid fa-user"></i> S'inscrire </li>
+            <li class="BM" onclick="window.location.href = 'connection.html'"><i class="fa-solid fa-user"></i> Se Connecter </li>
+        </ul>
+    </div>    
+</header>
+
+
+
+<body>
+     <div class="section">
+        <p>Potato's Pixel c'est quoi ?</p> 
+         <p>c'est un site web pour jouer avec des pixels</p>
+     </div>
+
+
+     <div class="section">
+        <p>ce site appartient à <strong>Azerioop</strong></p> 
+        <p>appartient à United links</p>
+        <p>ce site utilise des cookies</p>
+     </div>
+</body>
+<footer>
+    <p class="By">By DocuCode</p>
+    <p><a class="discord" target="_blank" href="https://discord.gg/6krZMJN57s"><i class="fa-brands fa-discord"></i> Discord</a></p>
+</footer>
+
+
+<script src="menu.js"></script>
+<script>
+    function loadUserProfile() {
+        fetch("/api/profile")
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.log("Non connecté");
+                    return "";
+                }
+            })
+            .then((profileData) => {
+                if (profileData) {
+                    document.getElementById("name").textContent = profileData.name;
+                }
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        loadUserProfile();
+    });
+</script>
+</html>

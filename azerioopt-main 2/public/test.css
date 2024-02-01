@@ -1,0 +1,171 @@
+/*
+    default element
+*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #707070;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*
+    container & global élément of container
+*/
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#connexion,
+#inscription {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 2.7em;
+    margin: 0;
+}
+
+.paragraphe {
+    margin: 20px 0;
+}
+
+.paragraphe {
+    opacity: 0.81;
+    font-size: 18px;
+}
+
+.btn-link,
+input[type="submit"] {
+    display: block;
+    line-height: 60px;
+    border: 1px solid #fff;
+    width: 230px;
+    height: 60px;
+    text-align: center;
+    border-radius: 9999px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: lighter;
+    transition: .2s;
+    cursor: pointer;
+}
+
+/*
+    connexion
+*/
+#connexion {
+    background: #198EF5;
+    text-align: center;
+}
+
+#connexion .title {
+    color: #fff;
+}
+
+#connexion .paragraphe {
+    color: #fff;
+
+}
+
+#connexion .connexion:hover {
+    background-color: #fff;
+    color: #198EF5;
+}
+
+/*
+    inscription
+*/
+
+#inscription .title {
+    color: #198EF5;
+}
+
+
+.group-form {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.group-form>div {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 2px;
+    left: 3px;
+
+}
+
+.group-form .icon-user {
+    background: url(../images/user.png);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.group-form .icon-mail {
+    background: url(../images/mail.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.group-form .icon-password {
+    background: url(../images/password.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.group-form input[type="text"],
+.group-form input[type="email"],
+.group-form input[type="password"] {
+    width: 250px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+}
+
+#inscription .inscription {
+    background-color: #198ef5;
+    margin: 1px auto;
+    margin-left: 6px;
+    width: 250px;
+    height: 40px;
+    border: 1px solid #264031;
+    border-radius: 9999px;
+    padding-left: 15px;
+    font-size: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#inscription .inscription:hover {
+    background-color: #d9f2e4;
+    color: #198EF5;
+    border: 1px solid #198EF5;
+    font-size: 22px;
+}
+
+@media (min-width: 992px) {
+    .container {
+        flex-direction: row;
+    }
+
+    #connexion {
+        width: 45%;
+        text-align: center;
+    }
+
+    #inscription {
+        width: 55%;
+    }
+}

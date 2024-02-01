@@ -1,0 +1,135 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Prompt:wght@300&family=Titillium+Web&family=Ubuntu:wght@300;500&display=swap');
+
+* {
+    font-family: 'Concert One', cursive;
+    font-family: 'Prompt', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
+body {
+    background-color: #ffa550;
+}
+header {
+    background-color: #952f00;
+    height: 100px;
+    width: 100%;
+    position: fixed; top: 0; left: 0;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+    font-size: large;
+}
+.logo {
+    cursor: pointer;
+    position: absolute; top: 1px;
+}
+
+.titre {
+  position: absolute; right: 25%;left: 25%; top: -10px;
+  width: 70%;
+  font-size: 40px;
+  z-index: 9999;
+}
+
+footer {
+    text-size-adjust: 1px;
+    background-color: #FF6A00;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    font-size: 25px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease; /* Define the transition property */
+}
+
+.discord {
+  text-decoration: none;
+  color: black;
+  position: absolute;  right: 30px; top: 25px;
+  cursor: pointer;
+}
+.discord:hover {
+  color: rgb(0, 89, 255);
+}
+
+
+
+
+
+/* le menu */
+.menu {
+    position: absolute; right: 20px;
+    display: inline-block;
+    z-index: 500;
+    margin-top: 30px;
+  }
+  
+  .menu-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .menu-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FFBE78;
+    padding: 10px;
+    width: 190px;
+    border-radius: 10px;
+    list-style-type: none;
+    color: rgb(50, 49, 49);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .menu-list li {
+    margin-bottom: 5px;
+  }
+
+  .BM:hover {
+      color: blue;
+  }
+  
+  .menu-toggle:focus + .menu-list,
+  .menu-list:focus-within {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+
+
+
+
+
+
+
+
+
+  @media screen and (max-width: 800px){
+    .titre {
+      font-size: 30px;
+      position: absolute; left: 20%; right: 20%;
+    }
+  }
+
+  @media screen and (max-width: 550px){
+    .titre {
+      font-size: 30px;
+      position: absolute; left: 110px;
+    }
+
+    .By {
+      position: absolute; left: 1px;
+    }
+  }

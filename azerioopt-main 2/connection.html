@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" CONTENT="Author: A.N. Ajib Roziq">
+    <meta name="robots" content="noindex,nofollow">
+    <title>S'inscire | potato's pixel</title>
+    <link rel="stylesheet" type="text/css" href="public/testconn.css">
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+    <div id="connexion">
+        <h1 class="title">Hello World</h1>
+        <p class="paragraphe">
+            Veuillez entrer vos détails personnel et démarrez votre journée sur PotatoPixel
+        </p>
+        <a href="inscription" class="btn-link connexion">Créer un compte</a>
+    </div>
+    <div id="inscription">
+        <h1 class="title">Se connecter</h1>
+        <p class="paragraphe">
+            Veuillez remplir tous les champs
+        </p>
+        <form id="account" class="formulaire">
+            <div class="group-form">
+                <input id="email" type="email" placeholder="mail">
+                <div class="icon-mail"></div>
+            </div>
+            <div class="group-form">
+                <input id="password" type="password" placeholder="password">
+                <div class="icon-password"></div>
+            </div>
+            <div class="group-form">
+                <button type="submit" class="inscription">Se connecter</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    const signIn = async (email, password) => {
+        try {
+            const response = await fetch('/api/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+            console.log("requête envoyée")
+            if (response.status === 200) {
+                console.log('Connexion réussie!');
+            } else {
+                const errorData = await response.json();
+                console.error('Échec de l\'authentification :', errorData.message);
+            }
+        } catch (error) {
+            console.error('Erreur lors de la demande de connexion :', error);
+        }
+    };
+
+    document.getElementById("account").addEventListener('submit', () => {
+        signIn(document.getElementById("email").value, document.getElementById("password").value);
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>potato's Pixel</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 7px; /* Supprimer les marges par défaut */
+            overflow: hidden; /* Empêcher le défilement de la page entière */
+        }
+
+        #place {
+            background-color: white;
+            overflow: auto; /* Activer le défilement pour la grille */
+            height: 74vh; /* Hauteur de la grille à 100% de la vue */
+            white-space: nowrap; /* Empêcher le saut de ligne pour permettre le défilement horizontal */
+            border-radius: 6px;
+            scrollbar-color: red;
+            border: rgb(39, 39, 39);
+            border-width: 4px;
+        }
+
+        table {
+            stroke: aquamarine;
+            border-collapse: collapse;
+        }
+
+        td {
+            min-width: 12px;
+            height: 12px;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            stroke: burlywood;
+            stroke-width: 3px;
+        }
+
+        #colorInput {
+            margin-top: 10px;
+            margin: 3px;
+            width: 90px;
+            height: 30px;          
+            border-width: 0px;
+            background-color: burlywood;
+            display: block; /* Afficher le champ de couleur en tant que bloc pour le séparer de la grille */
+        }
+        #rouge{
+            margin: 3px;
+            
+            background-color: rgb(189, 28, 28);
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #rouge:hover{
+            margin: 3px;
+            background-color: rgb(187, 20, 20);
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #bleu{
+            background-color: rgb(33, 73, 193);
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #jaune{
+            background-color: rgb(249, 211, 0);
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #vert{
+            background-color: #008000;
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #violet{
+            background-color:#7f00ff;
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #blanc{
+            background-color:#ffffff;
+            padding: 20px;
+            border-color: black;
+            margin: 0;
+        }
+        #zoomIn{
+            min-height: 30px;
+            min-width: 30px;
+            border-radius: 50px;
+            font-size: large;
+            background-color:rgba(233, 229, 229, 0.892) ;
+            border: 2px solid cadetblue;
+        }
+        #zoomIn:hover{
+            transform: scale(105%);
+            text-align: center;
+            color: azure;
+            background-color: rgb(172, 100, 7);
+        }
+        #zoomOut{
+            min-height: 30px;
+            min-width: 30px;
+            border-radius: 50px;
+            font-size: large;
+            background-color:rgba(233, 229, 229, 0.892) ;
+            border: 2px solid cadetblue;
+        }
+        #zoomOut:hover{
+            transform: scale(105%);
+            text-align: center;
+            color: azure;
+            background-color: rgb(172, 100, 7);
+        }
+        .bc{
+            border: #ffffff;
+            
+        }
+        .bc:active{
+            transform: scale(90%);
+        }
+        #colorx{
+            width: 20px;
+            height: 20px;
+            border: rebeccapurple;
+            background-color: white;
+        }
+        .connecter{
+            margin-top: 7px;
+            background-color: #198ef5;
+            margin: 1px auto;
+            margin-left: 6px;
+            margin-right: 6px;
+            width: 170px;
+            height: 40px;
+            border: 1px solid #264031;
+            border-radius: 9999px;
+            padding-left: 6px;
+            padding-right: 6px;
+            font-size: 15px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .connecter:hover{
+            background: #fff;
+            color: #198EF5;
+            border: 1px solid #198EF5;
+            cursor: help;
+        }
+        .connecterE{
+            margin-top: 7px;
+            background-color: #186c0d;
+            margin: 1px auto;
+            margin-left: 6px;
+            margin-right: 6px;
+            width: 170px;
+            height: 40px;
+            border: 1px solid #264031;
+            border-radius: 9999px;
+            padding-left: 6px;
+            padding-right: 6px;
+            font-size: 15px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .connecterE:hover{
+            background: #fff;
+            color: #0c6b2d;
+            border: 1px solid #094319;
+            cursor: help;
+        }
+    </style>
+</head>
+<body>
+
+<div id="place">
+    <table id="grid"></table>
+</div>
+<input type="color" id="colorInput" value="#ffffff"><div id="colorx"></div>
+<button id="blanc"  class="bc" value="#ff0000"></button>
+<button id="rouge"  class="bc"  value="#ff0000"></button>
+<button id="bleu"   class="bc" value="#ff0000"></button>
+<button id="jaune"  class="bc"  value="#ff0000"></button>
+<button id="vert"   class="bc" value="#ff0000"></button>
+<button id="violet" class="bc"  value="#ff0000"></button>
+<!-- Boutons de zoom et dézoom -->
+<button id="zoomIn"><strong>+</strong></button>
+<button id="zoomOut"><strong>-</strong></button>
+<button class="connecter" onclick="signInWithGoogle()">Se connecter avec Google</button>
+
+
+<!-- Include Firebase scripts without using modules -->
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+
+<script>
+    // Replace with your Firebase project configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAxny9cbrbeyzbOTmSO74T5MGrtwX1kN5Y",
+        authDomain: "potatopixel-ecef2.firebaseapp.com",
+        databaseURL: "https://potatopixel-ecef2-default-rtdb.firebaseio.com",
+        projectId: "potatopixel-ecef2",
+        storageBucket: "potatopixel-ecef2.appspot.com",
+        messagingSenderId: "76993631189",
+        appId: "1:76993631189:web:8aa9266cb9e06b506de35c",
+        measurementId: "G-Q56SXRKBMN"
+    };
+    // Assurez-vous que cette fonction est appelée au chargement de la page
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var provider = new firebase.auth.GoogleAuthProvider();
+    var canplace = false
+    console.log("canplace avant la connexion réussie:", canplace);
+    function signInWithGoogle() {
+        firebase.auth().signInWithPopup(provider)
+            .then(function (result) {
+                var user = result.user;
+                console.log("Utilisateur connecté avec Google:", user);
+                canplace = true
+                renderGrid(); // Mettez à jour l'interface utilisateur après la connexion réussie
+                console.log("canplace après la connexion réussie:", canplace);
+            })
+            .catch(function (error) {
+                console.error("Erreur lors de la connexion avec Google:", error);
+                canplace = false
+            });
+    }
+    function signInWithEmailAndPassword() {
+        var email = prompt("Entrez votre adresse e-mail :");
+        var password = prompt("Entrez votre mot de passe :");
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function (userCredential) {
+                // La connexion a réussi, mettez à jour l'interface utilisateur
+                var user = userCredential.user;
+                console.log("Utilisateur connecté par e-mail et mot de passe:", user);
+                canplace = true;
+                renderGrid();
+            })
+            .catch(function (error) {
+                // Une erreur s'est produite lors de la connexion, affichez l'erreur
+                console.error("Erreur lors de la connexion par e-mail et mot de passe:", error);
+                canplace = false;
+            });
+
+    }
+    function signUpWithEmailAndPassword() {
+    var email = prompt("Entrez votre adresse e-mail :");
+    var password = prompt("Entrez votre mot de passe :");
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(function (userCredential) {
+            var user = userCredential.user;
+            console.log("Utilisateur enregistré avec succès:", user);
+            canplace = true;
+            renderGrid();
+        })
+        .catch(function (error) {
+            console.error("Erreur lors de l'inscription par e-mail et mot de passe:", error);
+            canplace = false;
+        });
+}
+
+
+
+    var numRows = 101;
+    var numCols = 101;
+    
+    var gridRef = firebase.database().ref('grid');
+    var grid = createGrid(numRows, numCols);
+
+    // Default color
+    var selectedColor = '#ffffff';
+
+    function createGrid(rows, cols) {
+        var grid = [];
+        for (var i = 0; i < rows; i++) {
+            var row = [];
+            for (var j = 0; j < cols; j++) {
+                row.push('#ffffff'); // Default color is white
+            }
+            grid.push(row);
+        }
+        return grid;
+    }
+
+    function renderGrid() {
+        var gridTable = document.getElementById('grid');
+        gridTable.innerHTML = '';
+
+        for (var i = 0; i < numRows; i++) {
+            var row = document.createElement('tr');
+
+            for (var j = 0; j < numCols; j++) {
+                var cell = document.createElement('td');
+                cell.style.backgroundColor = grid[i][j];
+
+                // Utilisation des attributs data pour stocker les indices
+                cell.setAttribute('data-row', i);
+                cell.setAttribute('data-col', j);
+                
+                cell.addEventListener('click', function () {
+                    // Récupérer les indices à partir des attributs data
+                    var rowIndex = parseInt(this.getAttribute('data-row'));
+                    var colIndex = parseInt(this.getAttribute('data-col'));
+                    if (canplace == true) {
+                        // Change color using the selected color
+                        grid[rowIndex][colIndex] = selectedColor;
+                        updateFirebaseGrid();
+                    }
+                    
+                });
+
+                row.appendChild(cell);
+            }
+
+            gridTable.appendChild(row);
+        }
+    }
+
+    function updateFirebaseGrid() {
+        gridRef.set(grid);
+    }
+
+    // Listen for changes in the Firebase database
+    gridRef.on('value', function (snapshot) {
+        var firebaseGrid = snapshot.val();
+        if (firebaseGrid) {
+            grid = firebaseGrid;
+            renderGrid();
+        }
+    });
+
+    // Change the selected color when the input changes
+    document.getElementById('colorInput').addEventListener('input', function (event) {
+        selectedColor = event.target.value;
+        updateColor();
+    });
+
+    document.getElementById('blanc').addEventListener('click', function () {
+        selectedColor = '#ffffff';
+        updateColor();
+    });
+    document.getElementById('rouge').addEventListener('click', function () {
+        selectedColor = '#ff0000';
+        updateColor();
+    });
+    document.getElementById('bleu').addEventListener('click', function () {
+        selectedColor = '#0000ff';
+        updateColor();
+    });
+    document.getElementById('jaune').addEventListener('click', function () {
+        selectedColor = '#ffff00';
+        updateColor();
+    });
+    document.getElementById('vert').addEventListener('click', function () {
+        selectedColor = '#008000';
+        updateColor();
+    });
+    document.getElementById('violet').addEventListener('click', function () {
+        selectedColor = '#7f00ff';
+        updateColor();
+    });
+
+    var zoomLevel = 1; // Niveau de zoom initial
+
+    document.getElementById('zoomIn').addEventListener('click', function () {
+        zoomLevel += 0.1;
+        updateGridSize();
+    });
+
+    document.getElementById('zoomOut').addEventListener('click', function () {
+        zoomLevel -= 0.1;
+        updateGridSize();
+    });
+
+    function updateGridSize() {
+        var gridTable = document.getElementById('grid');
+        gridTable.style.transform = 'scale(' + zoomLevel + ')';
+    }
+
+    // Fonction pour mettre à jour la couleur du pixel
+    function updateColor() {
+        var elementcolor = document.getElementById('colorx');
+        elementcolor.style.backgroundColor = selectedColor;
+    }
+</script>
+</body>
+</html>
